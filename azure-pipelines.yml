@@ -2,7 +2,7 @@ trigger:
   - trunk
 
 pool:
-  name: Default
+  name: Red macOS
 
 steps:
   - task: Gradle@3
