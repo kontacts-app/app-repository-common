@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.spotless)
 }
 
 kotlin {
@@ -25,5 +26,21 @@ kotlin {
             isStatic = true
             baseName = "RepositoryKt"
         }
+    }
+}
+
+spotless {
+    kotlin {
+        target("**/*.kt")
+        targetExclude("${layout.buildDirectory}/**/*.kt")
+        ktlint(libs.versions.ktlint.get())
+            .editorConfigOverride(
+                mapOf("ktlint_standard_filename" to "disabled"),
+            )
+    }
+    kotlinGradle {
+        target("**/*.kts")
+        targetExclude("${layout.buildDirectory}/**/*.kts")
+        ktlint(libs.versions.ktlint.get())
     }
 }
