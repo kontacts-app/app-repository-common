@@ -1,0 +1,15 @@
+trigger:
+  - trunk
+
+pool:
+  name: Default
+
+steps:
+  - task: Gradle@3
+    inputs:
+      workingDirectory: ''
+      gradleWrapperFile: 'gradlew'
+      publishJUnitResults: true
+      jdkVersion: 17
+      testResultsFiles: '**/TEST-*.xml'
+      tasks: 'spotlessCheck assemble'
